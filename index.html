@@ -1,0 +1,56 @@
+<html>
+	<h1>Demo</h1>
+	<script type="module">
+		import { render, html } from "https://esm.sh/lit-html@2";
+
+		customElements.define(
+			"x-test",
+			class extends HTMLElement {
+				constructor() {
+					/* TODO: BE SURE that cannot attach listeners the easier way */
+					super();
+					const shadow = this.attachShadow({ mode: "open" });
+					shadow.innerHTML = "<button>clickme</button>";
+				}
+			}
+		);
+
+		customElements.define(
+			"button-counter",
+			class ButtonCounter extends HTMLElement {
+				buttonClicks = 0;
+
+				render() {
+					return html`<div>
+						<button @click="${this.#onClick}">Hello World!</button>
+					</div>`;
+				}
+
+				constructor() {
+					super();
+
+					if (!this.shadowRoot) {
+						this.attachShadow({ mode: "open" });
+					}
+
+					/* const shadow = this.attachShadow({ mode: "open" }); */
+					/* shadow.innerHTML = this.renderTemplate(); */
+					render(this.render(), this.shadowRoot);
+				}
+
+				doThing() {
+					console.log("do thing");
+				}
+
+				#onClick = function () {
+					console.log("foo");
+				};
+			}
+		);
+	</script>
+	<body>
+		<button-counter></button-counter>
+		<button-counter></button-counter>
+		<x-test></x-test>
+	</body>
+</html>
