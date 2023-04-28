@@ -17,3 +17,4 @@
 - ES Modules
 - wip: DOM Part API (evolution of HTML Template Instantiation)
 - wip: CSS Modules
+- todo: developit/htm, localvoid/ivi, lit/lit-html
